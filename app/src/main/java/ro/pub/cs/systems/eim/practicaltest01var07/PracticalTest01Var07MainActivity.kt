@@ -1,11 +1,15 @@
 package ro.pub.cs.systems.eim.practicaltest01var07
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+// În PracticalTest01Var07MainActivity.kt
 
 class PracticalTest01Var07MainActivity : AppCompatActivity() {
 
@@ -14,6 +18,8 @@ class PracticalTest01Var07MainActivity : AppCompatActivity() {
     lateinit var e3: EditText
     lateinit var e4: EditText
     lateinit var button_toggle: Button
+    lateinit var button_service: Button
+    lateinit var receiver: MyBroadcastReceiver
 
     // Variabile pentru a salva rezultatele
     private var sum: Double = 0.0
@@ -28,6 +34,7 @@ class PracticalTest01Var07MainActivity : AppCompatActivity() {
         e3 = findViewById(R.id.first1)
         e4 = findViewById(R.id.second1)
         button_toggle = findViewById(R.id.button_toggle)
+        button_service = findViewById(R.id.button_service)
 
         // Verifică dacă există date salvate
         savedInstanceState?.let {
@@ -58,6 +65,39 @@ class PracticalTest01Var07MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Toate câmpurile trebuie să conțină numere!", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+        receiver = object : MyBroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val value1 = intent?.getIntExtra("value1", -1)
+                val value2 = intent?.getIntExtra("value2", -1)
+                val value3 = intent?.getIntExtra("value3", -1)
+                val value4 = intent?.getIntExtra("value4", -1)
+
+                // Actualizează câmpurile de text cu valorile primite
+                e1.setText(value1?.toString())
+                e2.setText(value2?.toString())
+                e3.setText(value3?.toString())
+                e4.setText(value4?.toString())
+            }
+        }
+
+        // Înregistrează BroadcastReceiver-ul pentru a asculta la ACTION_SEND_VALUES
+        val filter = IntentFilter("ro.pub.cs.systems.eim.practicaltest01var07.ACTION_SEND_VALUES")
+        registerReceiver(receiver, filter, RECEIVER_EXPORTED)
+
+        button_service.setOnClickListener {
+            // Pornirea serviciului care trimite mesaje
+            val serviceIntent = Intent(this, PracticalTest01Var07Service::class.java)
+            startService(serviceIntent)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Opriți serviciul și deregistrați receiver-ul când activitatea este distrusă
+        stopService(Intent(this, PracticalTest01Var07Service::class.java))
+        unregisterReceiver(receiver)
     }
 
     // Funcție helper pentru a verifica dacă un text este numeric
