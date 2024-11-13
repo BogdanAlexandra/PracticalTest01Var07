@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PracticalTest01Var07MainActivity">
+    tools:context=".PracticalTest01Var07SecondaryActivity">
 
     <LinearLayout
         android:id="@+id/container_primary"
@@ -17,75 +17,90 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp">
 
-        <!-- Primul rând (două EditText-uri) -->
+        <!-- Primul rând (două TextView-uri) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/first0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:saveEnabled="false" />
+                android:text="Text 1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:minHeight="48dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/second0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:saveEnabled="false" />
+                android:text="Text 2"
+                android:gravity="center"
+                android:padding="8dp"
+                android:minHeight="48dp" />
         </LinearLayout>
 
-        <!-- Al doilea rând (două EditText-uri) -->
+        <!-- Al doilea rând (două TextView-uri) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/first1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:saveEnabled="false" />
+                android:text="Text 3"
+                android:gravity="center"
+                android:padding="8dp"
+                android:minHeight="48dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/second1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:saveEnabled="false" />
+                android:text="Text 4"
+                android:gravity="center"
+                android:padding="8dp"
+                android:minHeight="48dp" />
+        </LinearLayout>
+        <!-- Butoanele Sum și Product -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="16dp">
+
+            <Button
+                android:id="@+id/button_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sum"
+                android:padding="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/button_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product"
+                android:padding="8dp"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_toggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Set"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_primary" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
